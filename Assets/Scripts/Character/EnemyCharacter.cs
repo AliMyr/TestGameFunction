@@ -72,7 +72,7 @@ public class EnemyCharacter : Character, ICharacterInput
         if (timeBetweenAttackCounter <= 0)
         {
             DamageComponent.MakeDamage(targetCharacter);
-            timeBetweenAttackCounter = characterData.TimeBetweenAttacks;
+            timeBetweenAttackCounter = CharacterData.TimeBetweenAttacks;
         }
 
         if (timeBetweenAttackCounter > 0)

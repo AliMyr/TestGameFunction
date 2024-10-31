@@ -3,7 +3,9 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField]
-    public CharacterData characterData;
+    private CharacterData characterData;
+
+    public CharacterData CharacterData => characterData;
 
     public IMovable MovableComponent { get; protected set; }
     public ILiveComponent LiveComponent { get; protected set; }
@@ -12,7 +14,7 @@ public abstract class Character : MonoBehaviour
     public virtual void Start()
     {
         MovableComponent = new CharacterMovementComponent();
-        MovableComponent.Initialize(characterData);
+        MovableComponent.Initialize(this);
     }
 
     public abstract void Update();
