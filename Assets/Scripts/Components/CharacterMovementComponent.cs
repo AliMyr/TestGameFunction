@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovementComponent : IMovable
 {
     private CharacterData characterData;
     private float speed;
-    public float Speed 
-    { 
+
+    public float Speed
+    {
         get => speed;
         set
         {

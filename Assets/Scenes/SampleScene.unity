@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 3.98, z: -11.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -424,8 +424,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1007362583}
   - component: {fileID: 1007362582}
-  - component: {fileID: 1007362581}
-  - component: {fileID: 1007362580}
+  - component: {fileID: 1007362585}
+  - component: {fileID: 1007362584}
   m_Layer: 0
   m_Name: EnemyController
   m_TagString: Untagged
@@ -433,37 +433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1007362580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007362579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bf474d2043187646ae52ec100b3959a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 1007362581}
-  currentState: 0
-  targetCharacter: {fileID: 1170730452}
---- !u!114 &1007362581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007362579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0757363be2c89ce4ba5f596aae31caf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  timeBetweenAttacks: 1
-  characterTransform: {fileID: 1007362583}
-  characterController: {fileID: 1007362582}
 --- !u!143 &1007362582
 CharacterController:
   m_ObjectHideFlags: 0
@@ -506,6 +475,39 @@ Transform:
   - {fileID: 1136833520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007362584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007362579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf474d2043187646ae52ec100b3959a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 1007362585}
+  currentState: 0
+  targetCharacter: {fileID: 1170730456}
+  attackDistance: 2
+  chaseDistance: 10
+--- !u!114 &1007362585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007362579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c266c5ec876fce4da8a1073c20259d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  timeBetweenAttacks: 1
+  characterTransform: {fileID: 1007362583}
+  characterController: {fileID: 1007362582}
 --- !u!1 &1136833516
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,8 +728,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1170730455}
   - component: {fileID: 1170730454}
-  - component: {fileID: 1170730453}
-  - component: {fileID: 1170730452}
+  - component: {fileID: 1170730457}
+  - component: {fileID: 1170730456}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -735,35 +737,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1170730452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170730451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63dfaaa0878bc5e498c5fd2023f539c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 1170730453}
---- !u!114 &1170730453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170730451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0757363be2c89ce4ba5f596aae31caf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  timeBetweenAttacks: 0
-  characterTransform: {fileID: 1170730455}
-  characterController: {fileID: 1170730454}
 --- !u!143 &1170730454
 CharacterController:
   m_ObjectHideFlags: 0
@@ -806,6 +779,35 @@ Transform:
   - {fileID: 1161577149}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1170730456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170730451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63dfaaa0878bc5e498c5fd2023f539c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 1170730457}
+--- !u!114 &1170730457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170730451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c266c5ec876fce4da8a1073c20259d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  timeBetweenAttacks: 2
+  characterTransform: {fileID: 1170730455}
+  characterController: {fileID: 1170730454}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

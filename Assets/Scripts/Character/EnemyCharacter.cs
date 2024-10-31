@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacter : Character
+public class EnemyCharacter : Character, ICharacterInput
 {
-    [SerializeField] private AiState currentState = AiState.None; // —тартовое состо€ние - None
+    [SerializeField] private AiState currentState = AiState.None;
     [SerializeField] private Character targetCharacter;
 
     private float timeBetweenAttackCounter = 0;
@@ -15,9 +13,8 @@ public class EnemyCharacter : Character
     public override void Start()
     {
         base.Start();
-
         LiveComponent = new ImmortalLiveComponent();
-        DamageComponent = new CharacterDamgaeComponent();
+        DamageComponent = new CharacterDamageComponent();
     }
 
     public override void Update()
@@ -29,18 +26,15 @@ public class EnemyCharacter : Character
             case AiState.None:
                 CheckForChase(distanceToTarget);
                 break;
-
             case AiState.MoveToTarget:
                 MoveToTarget(distanceToTarget);
                 break;
-
             case AiState.Attack:
                 AttackTarget(distanceToTarget);
                 break;
         }
     }
 
-    // ѕроверка, чтобы начать преследование только если цель в пределах chaseDistance
     private void CheckForChase(float distanceToTarget)
     {
         if (distanceToTarget <= chaseDistance)
@@ -57,7 +51,7 @@ public class EnemyCharacter : Character
             return;
         }
 
-        Vector3 direction = (targetCharacter.transform.position - transform.position).normalized;
+        Vector3 direction = GetMovementInput();
         MovableComponent.Move(direction);
         MovableComponent.Rotation(direction);
 
@@ -83,5 +77,15 @@ public class EnemyCharacter : Character
 
         if (timeBetweenAttackCounter > 0)
             timeBetweenAttackCounter -= Time.deltaTime;
+    }
+
+    public Vector3 GetMovementInput()
+    {
+        return (targetCharacter.transform.position - transform.position).normalized;
+    }
+
+    public bool IsAttackInput()
+    {
+        return Vector3.Distance(targetCharacter.transform.position, transform.position) <= attackDistance;
     }
 }

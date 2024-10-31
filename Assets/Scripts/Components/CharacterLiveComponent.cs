@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterLiveComponent : ILiveComponent
 {
     private float currentHealth;
 
-    public float MaxHealth 
+    public float MaxHealth
     {
-        get => 50; 
-        set { return; } 
+        get => 50;
+        set { }
     }
 
-    public float Health 
-    { 
-        get => currentHealth; 
-        set 
-        { 
+    public float Health
+    {
+        get => currentHealth;
+        set
+        {
             currentHealth = value;
             if (currentHealth > MaxHealth)
                 currentHealth = MaxHealth;
@@ -26,7 +24,7 @@ public class CharacterLiveComponent : ILiveComponent
                 currentHealth = 0;
                 SetDeath();
             }
-        } 
+        }
     }
 
     public CharacterLiveComponent()

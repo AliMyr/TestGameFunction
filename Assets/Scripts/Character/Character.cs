@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     public CharacterData characterData;
 
     public IMovable MovableComponent { get; protected set; }
