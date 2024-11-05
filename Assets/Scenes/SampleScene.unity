@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c266c5ec876fce4da8a1073c20259d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 6
   timeBetweenAttacks: 2
   characterTransform: {fileID: 1170730455}
   characterController: {fileID: 1170730454}
