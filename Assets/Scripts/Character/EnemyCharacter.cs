@@ -6,16 +6,17 @@ public class EnemyCharacter : Character
 {
     [SerializeField] private AiState currentState;
 
-    [SerializeField]
-    private Character targetCharacter;
-
     private float timeBetweenAttackCounter = 0;
 
-    public override void Start()
-    {
-        base.Start();
+    public override Character CharacterTarget => 
+        GameManager.Instance.CharacterFactory.Player;
 
-        LiveComponent = new ImmortalLiveComponent();
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        LiveComponent = new CharacterLiveComponent();
+        LiveComponent.Initialize(this);
 
         DamageComponent = new CharacterDamgaeComponent();
     }
@@ -28,16 +29,16 @@ public class EnemyCharacter : Character
                 break;
 
             case AiState.MoveToTarget:
-                Vector3 direction = targetCharacter.transform.position - transform.position;
+                Vector3 direction = CharacterTarget.transform.position - transform.position;
                 direction.Normalize();
 
                 MovableComponent.Move(direction);
                 MovableComponent.Rotation(direction);
 
-                if (Vector3.Distance(targetCharacter.transform.position, transform.position) < 3
+                if (Vector3.Distance(CharacterTarget.transform.position, transform.position) < 3
                     && timeBetweenAttackCounter <= 0) 
                 {
-                    DamageComponent.MakeDamage(targetCharacter);
+                    DamageComponent.MakeDamage(CharacterTarget);
                     timeBetweenAttackCounter = characterData.TimeBetweenAttacks;
                 }
 

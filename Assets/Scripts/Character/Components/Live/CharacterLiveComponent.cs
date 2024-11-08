@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterLiveComponent : ILiveComponent
 {
+    private Character selfCharacter;
     private float currentHealth;
+
+    public event Action<Character> OnCharacterDeath;
 
     public float MaxHealth 
     {
@@ -40,8 +44,14 @@ public class CharacterLiveComponent : ILiveComponent
         Debug.Log("Get damage = " + damage);
     }
 
-    public void SetDeath()
+    private void SetDeath()
     {
+        OnCharacterDeath?.Invoke(selfCharacter);
         Debug.Log("Death!");
+    }
+
+    public void Initialize(Character selfCharacter)
+    {
+        this.selfCharacter = selfCharacter;
     }
 }
