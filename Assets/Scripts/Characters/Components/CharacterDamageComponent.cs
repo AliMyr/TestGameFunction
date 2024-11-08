@@ -7,6 +7,8 @@ public class CharacterDamageComponent : IDamageComponent
     public void MakeDamage(Character characterTarget)
     {
         if (characterTarget.LiveComponent != null)
+        {
             characterTarget.LiveComponent.SetDamage(Damage);
+        }
     }
 }
