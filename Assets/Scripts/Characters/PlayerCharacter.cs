@@ -9,18 +9,16 @@ public class PlayerCharacter : Character
         {
             Character target = null;
             float minDistance = float.MaxValue;
-            List<Character> list = GameManager.Instance.CharacterFactory.ActiveCharacter;
-            for (int i = 0; i < list.Count; i++)
+            List<Character> list = GameManager.Instance.CharacterFactory.ActiveCharacters;
+            foreach (var enemy in list)
             {
-                if (list[i].CharacterType == CharacterType.Player)
+                if (enemy.CharacterType == CharacterType.Player) continue;
+
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                if (distance < minDistance)
                 {
-                    continue;
-                }
-                float distanceBetween = Vector3.Distance(list[i].transform.position, transform.position);
-                if (distanceBetween < minDistance)
-                {
-                    target = list[i];
-                    minDistance = distanceBetween;
+                    target = enemy;
+                    minDistance = distance;
                 }
             }
             return target;
@@ -30,12 +28,7 @@ public class PlayerCharacter : Character
     public override void Initialize()
     {
         base.Initialize();
-
-        MovableComponent = new CharacterMovementComponent();
-        MovableComponent.Initialize(this);
-
-        LiveComponent = new CharacterLiveComponent();
-
+        LiveComponent = new CharacterLiveComponent(GetComponent<Renderer>()); // Передаем рендерер
         DamageComponent = new CharacterDamageComponent();
     }
 
@@ -60,6 +53,9 @@ public class PlayerCharacter : Character
                 if (Input.GetButtonDown("Jump") && DamageComponent != null)
                 {
                     DamageComponent.MakeDamage(CharacterTarget);
+
+                    // Визуальная индикация атаки (можно добавить звук или эффект удара)
+                    Debug.Log("Player attacked the enemy!");
                 }
             }
 

@@ -23,6 +23,7 @@ public class ScoreSystem
 
     public void AddScore(int earnedScore)
     {
+        if (earnedScore < 0) return; // Ќе позвол€ем добавл€ть отрицательный счет
         Score += earnedScore;
     }
 }

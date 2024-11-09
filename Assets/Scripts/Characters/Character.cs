@@ -23,8 +23,9 @@ public abstract class Character : MonoBehaviour
 
     public abstract void Update();
 
-    public void Enqueue(Character character)
+    public void Enqueue()
     {
-        // Дополнительная логика для сброса состояния персонажа перед возвращением в пул.
+        // Логика для сброса состояния перед возвращением в пул.
+        gameObject.SetActive(false);
     }
 }

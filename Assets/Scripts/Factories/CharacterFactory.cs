@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CharacterFactory : MonoBehaviour
 {
@@ -9,10 +9,10 @@ public class CharacterFactory : MonoBehaviour
     private Dictionary<CharacterType, Queue<Character>> disabledCharacters
         = new Dictionary<CharacterType, Queue<Character>>();
 
-    private List<Character> activeCharacter = new List<Character>();
+    private List<Character> activeCharacters = new List<Character>();
 
     public Character Player { get; private set; }
-    public List<Character> ActiveCharacter => activeCharacter;
+    public List<Character> ActiveCharacters => activeCharacters;
 
     public Character GetCharacter(CharacterType type)
     {
@@ -31,17 +31,20 @@ public class CharacterFactory : MonoBehaviour
             character = InstantiateCharacter(type);
         }
 
-        activeCharacter.Add(character);
+        activeCharacters.Add(character);
+        character.gameObject.SetActive(true);
         return character;
     }
 
     public void ReturnCharacter(Character character)
     {
-        Queue<Character> characters = disabledCharacters[character.CharacterType];
-        character.Enqueue(character);
-        character.gameObject.SetActive(false);
+        if (character == null) return;
 
-        activeCharacter.Remove(character);
+        character.Enqueue();
+        Queue<Character> characters = disabledCharacters[character.CharacterType];
+        characters.Enqueue(character);
+
+        activeCharacters.Remove(character);
     }
 
     private Character InstantiateCharacter(CharacterType type)
@@ -62,6 +65,7 @@ public class CharacterFactory : MonoBehaviour
                 Debug.LogError("Unknown character type: " + type);
                 break;
         }
+        character.Initialize();
         return character;
     }
 }

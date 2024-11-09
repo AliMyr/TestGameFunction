@@ -4,10 +4,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameData gameData;
     [SerializeField] private CharacterFactory characterFactory;
+    [SerializeField] private CharacterSpawnController characterSpawnController; // Добавлено
 
     private ScoreSystem scoreSystem;
     private float gameSessionTime;
-    private float timeBetweenEnemySpawn;
     private bool isGameActive;
 
     public static GameManager Instance { get; private set; }
@@ -48,9 +48,10 @@ public class GameManager : MonoBehaviour
         }
 
         gameSessionTime = 0;
-        timeBetweenEnemySpawn = gameData.TimeBetweenEnemySpawn;
         scoreSystem.StartGame();
         isGameActive = true;
+
+        characterSpawnController.enabled = true; // Включаем спавн врагов при старте игры
     }
 
     private void Update()
@@ -58,13 +59,6 @@ public class GameManager : MonoBehaviour
         if (!isGameActive) return;
 
         gameSessionTime += Time.deltaTime;
-        timeBetweenEnemySpawn -= Time.deltaTime;
-
-        if (timeBetweenEnemySpawn <= 0)
-        {
-            SpawnEnemy();
-            timeBetweenEnemySpawn = gameData.TimeBetweenEnemySpawn;
-        }
 
         if (gameSessionTime >= gameData.SessionTimeSecond)
         {
@@ -88,27 +82,6 @@ public class GameManager : MonoBehaviour
 
         deathCharacter.gameObject.SetActive(false);
         characterFactory.ReturnCharacter(deathCharacter);
-    }
-
-    private void SpawnEnemy()
-    {
-        Character enemy = characterFactory.GetCharacter(CharacterType.DefaultEnemy);
-        Vector3 playerPosition = characterFactory.Player.transform.position;
-        enemy.transform.position = new Vector3(playerPosition.x + GetOffset(), 0, playerPosition.z + GetOffset());
-        enemy.gameObject.SetActive(true);
-        enemy.Initialize();
-
-        if (enemy.LiveComponent != null)
-        {
-            enemy.LiveComponent.OnCharacterDeath += CharacterDeathHandler;
-        }
-
-        float GetOffset()
-        {
-            bool isPlus = Random.Range(0, 100) % 2 == 0;
-            float offset = Random.Range(gameData.MinSpawnOffset, gameData.MaxSpawnOffset);
-            return isPlus ? offset : -offset;
-        }
     }
 
     private void GameVictory()
